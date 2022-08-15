@@ -1,0 +1,41 @@
+{
+  "COMMON": {
+    "SEND": "Send",
+    "RECEIVE": "Receive",
+    "TRANSACTION": "Transaction",
+    "BLOCK": "Block",
+    "DELETE": "Delete",
+    "CANCEL": "Cancel",
+    "CONFIRM": "Confirm",
+    "OK": "OK",
+    "ERROR": "Error",
+    "SUCCESS": "Success",
+    "WARNING": "Warning",
+    "INFO": "Info",
+    "CLOSE": "Close",
+    "YES": "Yes",
+    "NO": "No",
+    "NEXT": "Next",
+    "PREVIOUS": "Previous",
+    "REFRESH": "Refresh",
+    "SEARCH": "Search",
+    "EDIT": "Edit",
+    "ADD": "Add",
+    "SAVE": "Save"
+  },
+  "AUTH": {
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "REGISTER": "Register",
+    "FORGOT_PASSWORD": "Forgot Password",
+    "RESET_PASSWORD": "Reset Password",
+    "CHANGE_PASSWORD": "Change Password",
+    "CHANGE_PASSWORD_SUCCESS": "Password changed successfully",
+    "CHANGE_PASSWORD_ERROR": "Error changing password",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "PASSWORD_CONFIRM": "Confirm Password",
+    "PASSWORD_CONFIRM_ERROR": "Passwords do not match",
+    "PASSWORD_ERROR": "Password is required"
+  }
+}
