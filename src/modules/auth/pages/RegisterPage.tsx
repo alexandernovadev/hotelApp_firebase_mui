@@ -9,16 +9,17 @@ import {
   Typography,
 } from "@mui/material";
 import { AuthLayout } from "../layouts/AuthLayout";
+import { useTranslation } from "react-i18next";
 
 export const RegisterPage = () => {
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const { t } = useTranslation();
 
-  const onSubmit = (e:React.SyntheticEvent) => {
+  const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
   };
 
   return (
-    <AuthLayout title="Crear cuenta">
+    <AuthLayout title={t("AUTH.CREATE_ACCOUNT")}>
       <form
         onSubmit={onSubmit}
         className="animate__animated animate__fadeIn animate__faster"
@@ -26,31 +27,34 @@ export const RegisterPage = () => {
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
-              label="Nombre completo"
-              type="text"
-              placeholder="Nombre completo"
+              autoComplete="off"
               fullWidth
+              label={t("AUTH.FULL_NAME")}
               name="displayName"
+              placeholder={t("AUTH.FULL_NAME")}
+              type="text"
             />
           </Grid>
 
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
-              label="Correo"
-              type="email"
-              placeholder="correo@google.com"
+              autoComplete="off"
               fullWidth
+              label={t("AUTH.EMAIL")}
               name="email"
+              placeholder="correo@google.com"
+              type="email"
             />
           </Grid>
 
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
-              label="Contraseña"
-              type="password"
-              placeholder="Contraseña"
+              autoComplete="off"
               fullWidth
+              label={t("AUTH.PASSWORD")}
               name="password"
+              placeholder={t("AUTH.PASSWORD")}
+              type="password"
             />
           </Grid>
 
@@ -61,15 +65,15 @@ export const RegisterPage = () => {
 
             <Grid item xs={12}>
               <Button type="submit" variant="contained" fullWidth>
-                Crear cuenta
+                {t("AUTH.REGISTER")}
               </Button>
             </Grid>
           </Grid>
 
           <Grid container direction="row" justifyContent="end">
-            <Typography sx={{ mr: 1 }}>¿Ya tienes cuenta?</Typography>
+            <Typography sx={{ mr: 1 }}>{t("AUTH.ALREADY_ACCOUNT")}</Typography>
             <Link component={RouterLink} color="inherit" to="/auth/login">
-              ingresar
+              {t("AUTH.LOGIN")}
             </Link>
           </Grid>
         </Grid>

@@ -1,15 +1,19 @@
 import { createTheme } from "@mui/material";
-import { red, green } from "@mui/material/colors";
+import { red } from "@mui/material/colors";
 
 export const purpleTheme = createTheme({
+  typography: {
+    fontFamily: ['Niramit', 'sans-serif'].join(','),
+  },
   palette: {
     primary: {
-      main: "#06283D",
-      light:"#ecf8fcfc",
-      contrastText: "#fff",
+      main: "#00dec5",
+      light: "#ffffff",
+      dark: "#00a887",
+      contrastText: "#000000",
     },
     secondary: {
-      main: "#1363DF",
+      main: "#54595f",
       contrastText: "#fff",
     },
     error: {

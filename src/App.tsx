@@ -8,7 +8,7 @@ import { AppRouter } from './router/AppRouter';
 
 function App() {
   // const { t, i18n } = useTranslation();
-  // <h1>{t('COMMON.SEND')}</h1>
+  // <h1>{t('AUTH.LOGIN')}</h1>
 
   return (
     <>

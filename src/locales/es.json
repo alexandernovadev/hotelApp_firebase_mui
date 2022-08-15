@@ -34,8 +34,15 @@
     "CHANGE_PASSWORD_ERROR":"Error al cambiar la contraseña",
     "EMAIL":"Correo electrónico",
     "PASSWORD":"Contraseña",
+    "PASSWORD_REQUIRED":"Contraseña es requerida",
     "PASSWORD_CONFIRM":"Confirmar contraseña",
     "PASSWORD_CONFIRM_ERROR":"Las contraseñas no coinciden",
-    "PASSWORD_ERROR":"La contraseña debe tener al menos 8 caracteres"
+    "PASSWORD_ERROR":"La contraseña debe tener al menos 8 caracteres",
+    "CREATE_ACCOUNT":"Crear una cuenta",
+    "INVALID_EMAIL":"Email invalido",
+    "REQUIRED_EMAIL":"Correo es requerido",
+    "FULL_NAME":"Nombre Completo",
+    "ALREADY_ACCOUNT":"¿Ya tienes una cuenta?"
+
   }
 }

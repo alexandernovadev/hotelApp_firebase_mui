@@ -34,8 +34,15 @@
     "CHANGE_PASSWORD_ERROR": "Error changing password",
     "EMAIL": "Email",
     "PASSWORD": "Password",
+    "PASSWORD_REQUIRED":"Password required",
     "PASSWORD_CONFIRM": "Confirm Password",
     "PASSWORD_CONFIRM_ERROR": "Passwords do not match",
-    "PASSWORD_ERROR": "Password is required"
+    "PASSWORD_ERROR": "Password is required",
+    "CREATE_ACCOUNT":"Create an account",
+    "INVALID_EMAIL":"Invalid email",
+    "REQUIRED_EMAIL":"Email is required",
+    "FULL_NAME":"Full Name",
+    "ALREADY_ACCOUNT":"You already have an account ?"
+
   }
 }
