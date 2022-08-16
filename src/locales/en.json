@@ -46,6 +46,10 @@
     "ALREADY_ACCOUNT":"You already have an account ?",
     "NAME_REQUIRED":"Name is required",
     "NAME_ERROR":"Name should be at least 4 characters",
-    "EMAIL_IN_USE":"Email is already in use"
+    "EMAIL_IN_USE":"Email is already in use",
+    "USER_NO_EXIST":"User does not exist",
+    "EMAILORPASSWORD_ERROR":"Email or password is incorrect",
+    "POPUP_CLOSED_ERROR":"Popup closed error"
+
   }
 }

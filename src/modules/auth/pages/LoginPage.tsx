@@ -1,15 +1,33 @@
 // import { useMemo, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { Button, Grid, Link, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Google } from "@mui/icons-material";
 import { AuthLayout } from "../layouts/AuthLayout";
 import { useFormik } from "formik";
 
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
+import { useLogin } from "../hooks/useLogin";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
+import { useGoogleSignIn } from "../hooks/useGoogleSignIn";
 
 export const LoginPage = () => {
   const { t } = useTranslation();
+  const { loginFire } = useLogin();
+
+  const {loginWithGoogle} = useGoogleSignIn();
+  
+  const { status, errorMessage } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   const validationSchema = yup.object({
     email: yup
@@ -23,7 +41,7 @@ export const LoginPage = () => {
       .required(t("AUTH.PASSWORD_REQUIRED")),
   });
 
-  const onGoogleSignIn = () => {};
+
 
   const { values, touched, errors, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -32,7 +50,8 @@ export const LoginPage = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
+      loginFire(values);
+      console.log("Login :", values);
     },
   });
 
@@ -65,7 +84,7 @@ export const LoginPage = () => {
               label={t("AUTH.PASSWORD")}
               name="password"
               onChange={handleChange}
-              placeholder={t("AUTH.PASSWORD")}  
+              placeholder={t("AUTH.PASSWORD")}
               type="password"
               value={values.password}
               variant="standard"
@@ -73,13 +92,22 @@ export const LoginPage = () => {
           </Grid>
 
           <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
+            <Grid item xs={12} display={!!errorMessage ? "" : "none"}>
+              <Alert severity="error">{errorMessage}</Alert>
+            </Grid>
+
             <Grid item xs={12} sm={6}>
-              <Button type="submit" variant="contained" fullWidth>
-                {t("AUTH.CREATE_ACCOUNT")}  
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={status === "checking"}
+                fullWidth
+              >
+                {t("AUTH.CREATE_ACCOUNT")}
               </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Button onClick={onGoogleSignIn} variant="contained" fullWidth>
+              <Button onClick={loginWithGoogle} variant="contained" fullWidth>
                 <Google />
                 <Typography sx={{ ml: 1 }}>Google</Typography>
               </Button>

@@ -10,12 +10,13 @@ import { FirebaseAuth } from "./config";
 
 const googleProvider = new GoogleAuthProvider();
 
-interface dataUser {
+interface IUser {
   email: string;
   password: string;
+}
+interface dataUser extends IUser {
   displayName: string;
 }
-
 
 export const singInWithGoogle = async () => {
   try {
@@ -31,7 +32,7 @@ export const singInWithGoogle = async () => {
       photoURL,
       uid,
     };
-  } catch (error) {
+  } catch (error: any) {
     const errorCode = error.code;
     const errorMessage = error.message;
 
@@ -70,7 +71,7 @@ export const registerUserWithEmailPassword = async ({
   }
 };
 
-export const loginWithEmailPassword = async ({ email, password }: dataUser) => {
+export const loginWithEmailPassword = async ({ email, password }: IUser) => {
   try {
     const resp = await signInWithEmailAndPassword(
       FirebaseAuth,

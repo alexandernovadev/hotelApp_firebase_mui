@@ -46,6 +46,9 @@
     "ALREADY_ACCOUNT":"¿Ya tienes una cuenta?",
     "NAME_REQUIRED":"Nombre es requerido",
     "NAME_ERROR":"Nombre debe tener al menos 4 caracteres",
-    "EMAIL_IN_USE":"El correo ya está en uso"
+    "EMAIL_IN_USE":"El correo ya está en uso",
+    "USER_NO_EXIST":"El usuario no existe",
+    "EMAILORPASSWORD_ERROR":"Correo o contraseña incorrectos",
+    "POPUP_CLOSED_ERROR":"El popup se cerró"
   }
 }
