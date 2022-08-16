@@ -46,6 +46,7 @@ export const registerUserWithEmailPassword = async ({
     );
     const { uid, photoURL } = resp.user;
 
+    /* @ts-ignore */
     await updateProfile(FirebaseAuth.currentUser, { displayName });
 
     return {
