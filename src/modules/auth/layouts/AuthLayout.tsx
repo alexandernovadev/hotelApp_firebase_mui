@@ -1,14 +1,12 @@
-import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import { Grid, Typography } from "@mui/material";
-// import { Link } from "react-router-dom";
 import { FlagTranslate } from "../../../UI/FlagTranslate";
 
 interface Props{
-  children: ReactJSXElement | ReactJSXElement[];
+  children: JSX.Element | JSX.Element[];
   title:string
 }
 
-export const AuthLayout = ({ children, title = "HILA" }:Props) => {
+export const AuthLayout = ({ children, title = "" }:Props) => {
   return (
     <Grid
       container
@@ -37,7 +35,7 @@ export const AuthLayout = ({ children, title = "HILA" }:Props) => {
         <Typography variant="h5" sx={{ mb: 1 }}>
           {title}
         </Typography>
-        {/* <Link to="/dash">Dash</Link> */}
+    
         {children}
         <FlagTranslate />
       </Grid>

@@ -41,8 +41,6 @@ export const LoginPage = () => {
       .required(t("AUTH.PASSWORD_REQUIRED")),
   });
 
-
-
   const { values, touched, errors, handleChange, handleSubmit } = useFormik({
     initialValues: {
       email: "",

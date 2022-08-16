@@ -1,3 +1,4 @@
+import { IUser, dataUser } from './../interfaces/interfaces';
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -8,14 +9,6 @@ import {
 import { FirebaseAuth } from "./config";
 
 const googleProvider = new GoogleAuthProvider();
-
-interface IUser {
-  email: string;
-  password: string;
-}
-interface dataUser extends IUser {
-  displayName: string;
-}
 
 export const singInWithGoogle = async () => {
   try {

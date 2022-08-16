@@ -1,19 +1,13 @@
+import { dataUser as UserRegister } from './../../../interfaces/interfaces';
 import { useAppDispatch } from './../../../store/store';
 
 import { registerUserWithEmailPassword } from '../../../firebase/providers';
 import { checkingCredentials, login, logout } from '../../../store/auth/AuthSlice';
 import { useTranslation } from 'react-i18next';
 
-interface UserRegister {
-  email: string;
-  password: string;
-  displayName: string;
-}
 
 export const useRegister = () => {
-
   const dispatch = useAppDispatch();
-
   const { t } = useTranslation()
 
   const register = async ({

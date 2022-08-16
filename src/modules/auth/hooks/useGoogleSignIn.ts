@@ -1,11 +1,10 @@
-
-
-
-import { useAppDispatch } from './../../../store/store';
+import { useTranslation } from 'react-i18next';
 
 import { singInWithGoogle } from '../../../firebase/providers';
 import { checkingCredentials, login, logout } from '../../../store/auth/AuthSlice';
-import { useTranslation } from 'react-i18next';
+
+import { useAppDispatch } from './../../../store/store';
+
 
 export const useGoogleSignIn = () => {
 

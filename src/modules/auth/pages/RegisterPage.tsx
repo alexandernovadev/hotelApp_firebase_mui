@@ -1,4 +1,7 @@
-import React, { useState, useMemo } from "react";
+import {  useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import * as yup from "yup";
+import { useFormik } from "formik";
 import { Link as RouterLink } from "react-router-dom";
 import {
   Alert,
@@ -8,19 +11,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+
 import { AuthLayout } from "../layouts/AuthLayout";
-import { useTranslation } from "react-i18next";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import {  useSelector } from "react-redux";
 import { useRegister } from "../hooks/useRegister";
 import {RootState} from "../../../store/store"
 
 export const RegisterPage = () => {
   const { t } = useTranslation();
-
   const { status, errorMessage } = useSelector((state:RootState) => state.auth);
-    
   const { register } = useRegister();
 
   const validationSchema = yup.object({

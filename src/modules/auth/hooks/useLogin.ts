@@ -1,18 +1,14 @@
-import { useAppDispatch } from './../../../store/store';
+import { IUser as UserLogin } from './../../../interfaces/interfaces';
+import { useTranslation } from 'react-i18next';
 
 import { loginWithEmailPassword } from '../../../firebase/providers';
 import { checkingCredentials, login, logout } from '../../../store/auth/AuthSlice';
-import { useTranslation } from 'react-i18next';
 
-interface UserLogin {
-  email: string;
-  password: string;
-}
+import { useAppDispatch } from './../../../store/store';
+
 
 export const useLogin = () => {
-
   const dispatch = useAppDispatch();
-
   const { t } = useTranslation()
 
   const loginFire = async ({
@@ -36,7 +32,6 @@ export const useLogin = () => {
     }
 
     dispatch(login(result));
-
   }
 
   return {
