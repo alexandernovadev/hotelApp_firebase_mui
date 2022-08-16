@@ -42,7 +42,9 @@
     "INVALID_EMAIL":"Email invalido",
     "REQUIRED_EMAIL":"Correo es requerido",
     "FULL_NAME":"Nombre Completo",
-    "ALREADY_ACCOUNT":"¿Ya tienes una cuenta?"
+    "ALREADY_ACCOUNT":"¿Ya tienes una cuenta?",
+    "NAME_REQUIRED":"Nombre es requerido",
+    "NAME_ERROR":"Nombre debe tener al menos 4 caracteres"
 
   }
 }
