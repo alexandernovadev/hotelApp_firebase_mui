@@ -1,7 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useCheckAuth } from "../hooks/useCheckAuth";
 import { AuthRoutes } from "../modules/auth/routes/AuthRoutes";
-import { Home } from "../modules/hotel/pages/Home";
 import { HotelRoutes } from "../modules/hotel/routes/HotelRoutes";
 
 export const AppRouter = () => {
@@ -18,7 +17,7 @@ export const AppRouter = () => {
         : <Route path="/auth/*" element={<AuthRoutes />} />
       }
 
-      <Route path="/home" element={<Home />} />
+      {/* <Route path="/home" element={<Home />} /> */}
       <Route path="*" element={<Navigate to="/auth/login" replace />} />
     </Routes>
   );
