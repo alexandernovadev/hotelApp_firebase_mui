@@ -3,8 +3,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
-  updateProfile,
-  UserCredential,
+  updateProfile
 } from "firebase/auth";
 import { FirebaseAuth } from "./config";
 
@@ -21,12 +20,10 @@ interface dataUser extends IUser {
 export const singInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(FirebaseAuth, googleProvider);
-    // const credentials = GoogleAuthProvider.credentialFromResult( result );
     const { displayName, email, photoURL, uid } = result.user;
 
     return {
       ok: true,
-      // User info
       displayName,
       email,
       photoURL,

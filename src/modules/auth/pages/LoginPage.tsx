@@ -103,7 +103,7 @@ export const LoginPage = () => {
                 disabled={status === "checking"}
                 fullWidth
               >
-                {t("AUTH.CREATE_ACCOUNT")}
+                {t("AUTH.LOGIN")}
               </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
