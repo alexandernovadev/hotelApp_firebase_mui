@@ -1,30 +1,25 @@
-import { Route, Routes,Navigate } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useCheckAuth } from "../hooks/useCheckAuth";
 import { AuthRoutes } from "../modules/auth/routes/AuthRoutes";
-// import { useCheckAuth } from "../hooks/useCheckAuth";
-// import { JournalRoutes } from "../journal/routes/JournalRoutes";
-// import { CheckingAuth } from "../ui/components/CheckingAuth";
+import { Home } from "../modules/hotel/pages/Home";
+import { HotelRoutes } from "../modules/hotel/routes/HotelRoutes";
 
 export const AppRouter = () => {
+  const status = useCheckAuth();
 
-  const status = "checking";
-  // const status = useCheckAuth();
-
-  // if (status === "checking") return <CheckingAuth />;
+  if (status === "process") {
+    return <h1>Cargando ...</h1>;
+  }
 
   return (
     <Routes>
-      {/* {status === "authenticated" 
-      ? <Route path="/*" element={<JournalRoutes />} />
-      : <Route path="/auth/*" element={<AuthRoutes />} />
-      } */}
+      {status === "authenticated" 
+        ? <Route path="/*" element={<HotelRoutes />} />
+        : <Route path="/auth/*" element={<AuthRoutes />} />
+      }
 
-      {/* <Route path="/*" element={<Navigate to="/auth/login" />} /> */}
-
-      {/* Login y Registro */}
-      <Route path="/auth/*" element={ <AuthRoutes /> } />
-
-      {/* JournalApp */}
-      {/* <Route path="/*" element={ <JournalRoutes /> } /> */}
+      <Route path="/home" element={<Home />} />
+      <Route path="*" element={<Navigate to="/auth/login" replace />} />
     </Routes>
   );
 };

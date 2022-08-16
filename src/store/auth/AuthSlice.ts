@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
 interface AuthState {
-  status: 'checking' | 'non-authenticated' | 'authenticated';
+  status: 'checking' | 'non-authenticated' | 'authenticated' | 'process';
   uid: string | null;
   email: string | null;
   displayName: string | null;
@@ -44,7 +44,11 @@ export const authSlice = createSlice({
       state.status = "checking";
       state.errorMessage = '';
     },
+    checkingCredentialsFirebase: (state) => {
+      state.status = "process";
+      state.errorMessage = '';
+    },
   },
 });
 
-export const { login, logout, checkingCredentials } = authSlice.actions;
+export const { login, logout, checkingCredentials, checkingCredentialsFirebase } = authSlice.actions;
