@@ -48,10 +48,7 @@ export const RegisterPage = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log("Register : ", values);
       register(values);
-
-      // dispatch(startCreatingUserWithEmailPassword(values));
     },
   });
 
@@ -61,7 +58,6 @@ export const RegisterPage = () => {
         onSubmit={handleSubmit}
         className="animate__animated animate__fadeIn animate__faster"
       >
-        HOLA = {status}
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
@@ -110,7 +106,7 @@ export const RegisterPage = () => {
 
           <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
             <Grid item xs={12} display={!!errorMessage ? "" : "none"}>
-              <Alert severity="error">{errorMessage.replace('Firebase:','')}</Alert>
+              <Alert severity="error">{errorMessage}</Alert>
             </Grid> 
 
             <Grid item xs={12}>

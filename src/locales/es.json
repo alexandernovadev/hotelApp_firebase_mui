@@ -21,7 +21,8 @@
     "SEARCH":"Buscar",
     "EDIT":"Editar",
     "ADD":"Agregar",
-    "SAVE":"Guardar"    
+    "SAVE":"Guardar",
+    "ERROR_SERVER":"Error del servidor"
   },
   "AUTH":{
     "LOGIN":"Iniciar Sesión",
@@ -44,7 +45,7 @@
     "FULL_NAME":"Nombre Completo",
     "ALREADY_ACCOUNT":"¿Ya tienes una cuenta?",
     "NAME_REQUIRED":"Nombre es requerido",
-    "NAME_ERROR":"Nombre debe tener al menos 4 caracteres"
-
+    "NAME_ERROR":"Nombre debe tener al menos 4 caracteres",
+    "EMAIL_IN_USE":"El correo ya está en uso"
   }
 }

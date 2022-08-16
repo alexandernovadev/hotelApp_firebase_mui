@@ -11,18 +11,20 @@ interface AuthState {
   errorMessage: string | null;
 }
 
-export const authSlice = createSlice<AuthState, any, string>({
+const initialState = {
+  status: "non-authenticated",
+  uid: "",
+  email: "",
+  displayName: "",
+  photoURL: "",
+  errorMessage: "",
+} as AuthState
+
+export const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    status: "non-authenticated",
-    uid: "",
-    email: "",
-    displayName: "",
-    photoURL: "",
-    errorMessage: "",
-  },
+  initialState,
   reducers: {
-    login: (state: AuthState, { payload }: PayloadAction<AuthState>) => {
+    login: (state, { payload }) => {
       state.status = "authenticated";
       state.uid = payload.uid;
       state.email = payload.email;
@@ -30,15 +32,15 @@ export const authSlice = createSlice<AuthState, any, string>({
       state.photoURL = payload.photoURL;
       state.errorMessage = '';
     },
-    logout: (state: AuthState, { payload }: PayloadAction<AuthState>) => {
+    logout: (state, { payload }) => {
       state.status = "non-authenticated";
       state.uid = '';
       state.email = '';
       state.displayName = '';
       state.photoURL = '';
-      state.errorMessage = '';
+      state.errorMessage = payload;
     },
-    checkingCredentials: (state: AuthState) => {
+    checkingCredentials: (state) => {
       state.status = "checking";
       state.errorMessage = '';
     },
