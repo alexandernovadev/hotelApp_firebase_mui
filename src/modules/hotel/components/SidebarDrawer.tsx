@@ -11,8 +11,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { AppBar, Drawer, DrawerHeader } from "../utils/configDrawer";
+import Tooltip from "@mui/material/Tooltip";
 
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -21,6 +22,7 @@ import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useLogOut } from "../../auth/hooks/useLogOut";
 import { useNavigate } from "react-router-dom";
+import { FlagTranslate } from "../../../UI/FlagTranslate";
 
 const optionsMenu = [
   { title: "Crear Hotel", icon: <AddCircleIcon />, to: "/create" },
@@ -41,23 +43,28 @@ export const SidebarDrawer = ({ title }: { title: string }) => {
 
   return (
     <>
-      <AppBar position="fixed" open={open} sx={{}}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={() => setOpen(true)}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: "none" }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h5" noWrap >
-            {title}
-          </Typography>
+      <AppBar position="fixed" open={open}>
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          <Box sx={{ display: "flex" }}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={() => setOpen(true)}
+              edge="start"
+              sx={{
+                marginRight: 5,
+                ...(open && { display: "none" }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+              {title}
+            </Typography>
+          </Box>
+          <Box>
+            <FlagTranslate />
+          </Box>
         </Toolbar>
       </AppBar>
 
@@ -76,8 +83,37 @@ export const SidebarDrawer = ({ title }: { title: string }) => {
         <List>
           {optionsMenu.map(({ title, icon, to }, index) => (
             <ListItem key={title} disablePadding sx={{ display: "block" }}>
+              <Tooltip title={open ? "" : title} placement="left-start">
+                <ListItemButton
+                  onClick={() => handleRoute(to)}
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={title}
+                    sx={{ opacity: open ? 1 : 0 }}
+                  />
+                </ListItemButton>
+              </Tooltip>
+            </ListItem>
+          ))}
+
+          <ListItem key={title} disablePadding sx={{ display: "block" }}>
+            <Tooltip title={open ? "" : "Cerrar Sesion"} placement="left-start">
               <ListItemButton
-                onClick={() => handleRoute(to)}
+                onClick={() => logOutFire()}
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
@@ -91,36 +127,14 @@ export const SidebarDrawer = ({ title }: { title: string }) => {
                     justifyContent: "center",
                   }}
                 >
-                  {icon}
+                  <LogoutIcon />
                 </ListItemIcon>
-                <ListItemText primary={title} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  primary={"Cerrar Sesion"}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
               </ListItemButton>
-            </ListItem>
-          ))}
-
-          <ListItem key={title} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              onClick={() => logOutFire()}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary={"Cerrar Sesion"}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
+            </Tooltip>
           </ListItem>
         </List>
       </Drawer>

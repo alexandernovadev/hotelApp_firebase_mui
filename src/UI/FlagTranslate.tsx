@@ -1,25 +1,32 @@
 import { useTranslate } from "../hooks/useTranslate";
+import { styled, Theme, CSSObject } from "@mui/material/styles";
 
-import { Button } from "@mui/material";
+export const Button = styled("button")(({ theme }) => ({
+  border: "none",
+  fontSize: "1.2em",
+  cursor: "pointer",
+  background: "transparent",
+  padding: theme.spacing(0, 1),
+}));
 
 export const FlagTranslate = () => {
-  const { setTranslate } = useTranslate();
+  const { setTranslate, getLocale } = useTranslate();
 
   return (
     <>
       <Button
-        variant="outlined"
-        sx={{ p: 0, mr: 1 }}
         onClick={() => setTranslate("en")}
+        style={{ fontWeight: getLocale() == "en" ? "bold" : "" }}
       >
-        EN
+        en
       </Button>
+      <b>|</b>
+
       <Button
-        variant="outlined"
-        sx={{ p: 0, mr: 1 }}
+        style={{ fontWeight: getLocale() == "es" ? "bold" : "" }}
         onClick={() => setTranslate("es")}
       >
-        ES
+        es
       </Button>
     </>
   );

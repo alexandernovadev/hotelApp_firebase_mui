@@ -34,12 +34,12 @@ export const AuthLayout = ({ children, title = "HILA" }:Props) => {
           borderRadius: 2,
         }}
       >
-        <FlagTranslate />
         <Typography variant="h5" sx={{ mb: 1 }}>
           {title}
         </Typography>
         {/* <Link to="/dash">Dash</Link> */}
         {children}
+        <FlagTranslate />
       </Grid>
     </Grid>
   );
