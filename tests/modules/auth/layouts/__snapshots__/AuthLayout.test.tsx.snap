@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test in <AuthLayot/> Should match with the snapshot 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column css-zqh5bb-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3 box-shadow animate__animated animate__fadeIn animate__faster css-8ez7fo-MuiGrid-root"
+    >
+      <h5
+        class="MuiTypography-root MuiTypography-h5 css-1jcm1rz-MuiTypography-root"
+      >
+        Testing
+      </h5>
+      Hola
+      <button
+        class="css-crr5sf"
+      >
+        en
+      </button>
+      <b>
+        |
+      </b>
+      <button
+        class="css-crr5sf"
+      >
+        es
+      </button>
+    </div>
+  </div>
+</div>
+`;

@@ -1,3 +1,4 @@
+import React from "react";
 import { useTranslate } from "../hooks/useTranslate";
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 

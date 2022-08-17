@@ -1,4 +1,4 @@
-// import { useMemo, useState } from "react";
+import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import {
   Alert,
@@ -23,8 +23,8 @@ export const LoginPage = () => {
   const { t } = useTranslation();
   const { loginFire } = useLogin();
 
-  const {loginWithGoogle} = useGoogleSignIn();
-  
+  const { loginWithGoogle } = useGoogleSignIn();
+
   const { status, errorMessage } = useSelector(
     (state: RootState) => state.auth
   );
@@ -49,13 +49,13 @@ export const LoginPage = () => {
     validationSchema,
     onSubmit: (values) => {
       loginFire(values);
-      console.log("Login :", values);
+      // console.log("Login :", values);
     },
   });
 
   return (
     <AuthLayout title={t("AUTH.LOGIN")}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} aria-label="submit-form">
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
@@ -66,6 +66,7 @@ export const LoginPage = () => {
               label={t("AUTH.EMAIL")}
               name="email"
               onChange={handleChange}
+              inputProps={{ "data-testid": "email" }}
               placeholder="correo@google.com"
               type="email"
               value={values.email}
@@ -84,6 +85,7 @@ export const LoginPage = () => {
               onChange={handleChange}
               placeholder={t("AUTH.PASSWORD")}
               type="password"
+              inputProps={{ "data-testid": "password" }}
               value={values.password}
               variant="standard"
             />
@@ -105,7 +107,12 @@ export const LoginPage = () => {
               </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Button onClick={loginWithGoogle} variant="contained" fullWidth>
+              <Button
+                onClick={loginWithGoogle}
+                aria-label="google-btn"
+                variant="contained"
+                fullWidth
+              >
                 <Google />
                 <Typography sx={{ ml: 1 }}>Google</Typography>
               </Button>
