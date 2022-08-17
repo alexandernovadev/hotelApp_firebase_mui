@@ -33,21 +33,35 @@ export const CreateHotel = () => {
       .required(t("AUTH.PASSWORD_REQUIRED")),
   });
 
+
+  const handleChangeE = (e:any,valie) => {
+    console.log("Vamos a ver hp", e);
+    console.log("Vamos ==== ", valie);
+    
+  }
   const { values, touched, errors, handleChange, handleSubmit } = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      name: "",
+      description: "",
+      country: "",
+      logo: "",
+      department: "",
+      municipality: "",
+      type_hotel: "",
+      score: 2,
+      roomtypes: {},
+      images: [],
     },
-    validationSchema,
+    // validationSchema,
     onSubmit: (values) => {
-      console.log("Creac hoter is ", values);
+      console.log("Save hotel is: ", values);
     },
   });
   /**
-  helperText={touched.email && errors.email}
-  error={touched.email && Boolean(errors.email)}
+  helperText={touched.name && errors.name}
+  error={touched.name && Boolean(errors.name)}
   onChange={handleChange}
-  value={values.email}
+  value={values.name}
    */
   return (
     <HotelLayout title={t("HOTEL.SAVE_HOTEL")}>
@@ -57,10 +71,12 @@ export const CreateHotel = () => {
             <Avatar
               alt="Remy Sharp"
               src="https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-original-577x577/s3/0020/6116/brand.gif?itok=3ZNfeNrU"
-              sx={{ width: 160, height: 160, border:'1px solid black' }}
+              sx={{ width: 160, height: 160, border: "1px solid black" }}
             />
-             <Button variant="outlined" component="label" sx={{mt:1}}>
-              <Typography sx={{ px: 2, mx: 1 }}>{t("COMMON.UPLOAD")}</Typography>
+            <Button variant="outlined" component="label" sx={{ mt: 1 }}>
+              <Typography sx={{ px: 2, mx: 1 }}>
+                {t("COMMON.UPLOAD")}
+              </Typography>
               <PhotoCamera />
               <input hidden accept="image/*" multiple type="file" />
             </Button>
@@ -71,14 +87,23 @@ export const CreateHotel = () => {
               autoComplete="off"
               fullWidth
               label={t("HOTEL.NAME_HOTEL")}
-              name="name_hotel"
+              name="name"
               inputProps={{ "data-testid": "name_hotel" }}
               placeholder="Hotel Decameron"
               type="text"
+              helperText={touched.name && errors.name}
+              error={touched.name && Boolean(errors.name)}
+              onChange={handleChange}
+              value={values.name}
               sx={{ my: 2 }}
               variant="standard"
             />
             <TextField
+              helperText={touched.description && errors.description}
+              error={touched.description && Boolean(errors.description)}
+              onChange={handleChange}
+              value={values.description}
+              name="description"
               variant="standard"
               id="outlined-multiline-static"
               label={t("HOTEL.DESCRIPTION")}
@@ -92,22 +117,21 @@ export const CreateHotel = () => {
 
           <Grid item xs={12} sm={4} sx={{ p: 2 }}>
             <FormControl fullWidth>
-              <InputLabel id="country_field">
-                {t("HOTEL.COUNTRY")}
-              </InputLabel>
+              <InputLabel id="country_field">{t("HOTEL.COUNTRY")}</InputLabel>
               <Select
                 labelId="country_field"
                 id="country_field-select"
-                value="{age}"
+                name="country"
+                value={values.country}
                 label={t("HOTEL.COUNTRY")}
                 onChange={handleChange}
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value={'Colombia'}>Colombia</MenuItem>
+                <MenuItem value={'Mexico'}>Mexico</MenuItem>
+                <MenuItem value={'Estado Unidos'}>Estados Unidos</MenuItem>
               </Select>
               {/* <FormHelperText>With label + helper text</FormHelperText> */}
             </FormControl>
@@ -119,18 +143,19 @@ export const CreateHotel = () => {
                 {t("HOTEL.DEPARTMENT")}
               </InputLabel>
               <Select
+                name="department"
                 labelId="department-field"
                 id="department-field-select-helper"
-                value="{age}"
+                value={values.department}
                 label={t("HOTEL.DEPARTMENT")}
                 onChange={handleChange}
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value={'Cundinamarca'}>Cundinamarca</MenuItem>
+                <MenuItem value={'Huila'}>Huila</MenuItem>
+                <MenuItem value={'Guaviare'}>Guaviare</MenuItem>
               </Select>
               {/* <FormHelperText>With label + helper text</FormHelperText> */}
             </FormControl>
@@ -138,21 +163,22 @@ export const CreateHotel = () => {
           <Grid item xs={12} sm={4} sx={{ p: 2 }}>
             <FormControl fullWidth>
               <InputLabel id="municipality-label">
-              {t("HOTEL.MUNICIPALITY")}
+                {t("HOTEL.MUNICIPALITY")}
               </InputLabel>
               <Select
+                name="municipality"
                 labelId="municipality-label"
                 id="municipality-label-select-helper"
-                value="{age}"
+                value={values.municipality}
                 label={t("HOTEL.MUNICIPALITY")}
                 onChange={handleChange}
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value={'La Santillana'}>La Santillana</MenuItem>
+                <MenuItem value={'Unidos Altos'}>Unidos Altos</MenuItem>
+                <MenuItem value={'San Pablo'}>San Pablo</MenuItem>
               </Select>
               {/* <FormHelperText>With label + helper text</FormHelperText> */}
             </FormControl>
@@ -161,29 +187,34 @@ export const CreateHotel = () => {
           <Grid item xs={12} sm={8} sx={{ p: 2 }}>
             <FormControl fullWidth>
               <InputLabel id="typeroom-label">
-              {t("HOTEL.TYPE_ROOM")}
+                {t("HOTEL.TYPE_HOTEL")}
               </InputLabel>
               <Select
+                name="type_hotel"
                 labelId="typeroom-label"
                 id="typeroom-label-select-helper"
-                value="{age}"
+                value={values.type_hotel}
                 label={t("HOTEL.TYPE_ROOM")}
                 onChange={handleChange}
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={1}>One</MenuItem>
-                <MenuItem value={2}>Twenty</MenuItem>
-                <MenuItem value={4}>Thirty</MenuItem>
+                <MenuItem value={3}>3 Estrellas</MenuItem>
+                <MenuItem value={4}>4 Estrellas</MenuItem>
+                <MenuItem value={5}>5 Estrellas</MenuItem>
               </Select>
               {/* <FormHelperText>With label + helper text</FormHelperText> */}
             </FormControl>
           </Grid>
 
           <Grid item xs={12} sm={4} sx={{ p: 2 }}>
-            <InputLabel id="scrore">{t("HOTEL.SCORE")}</InputLabel>
-            <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+            <InputLabel id="score">{t("HOTEL.SCORE")}</InputLabel>
+            <Rating 
+            name="score"
+            value={+values.score}
+            onChange={handleChange}
+            precision={0.5} />
           </Grid>
 
           <Grid item xs={12} sm={12} sx={{ p: 2 }}>
@@ -253,22 +284,24 @@ export const CreateHotel = () => {
 
           <Grid item xs={12} sm={4} sx={{ p: 2 }}>
             <Button variant="outlined" component="label">
-              <Typography sx={{ px: 2, mx: 1 }}>{t("COMMON.UPLOAD")}</Typography>
+              <Typography sx={{ px: 2, mx: 1 }}>
+                {t("COMMON.UPLOAD")}
+              </Typography>
               <PhotoCamera />
               <input hidden accept="image/*" multiple type="file" />
             </Button>
           </Grid>
 
-          {Array.from({ length: 8 }).map((i) => (
-            <Grid item xs={4} sm={4} sx={{ p: 1 }} key={i}>
-              <img
+          {/* {Array.from({ length: 8 }).map((i) => ( */}
 
-                src="https://mui.com/static/images/avatar/1.jpg"
-                style={{ borderRadius: "12px" , width:'100%', height:220}}
-                alt=""
-              />
-            </Grid>
-          ))}
+          <Grid item xs={4} sm={4} sx={{ p: 1 }}>
+            <img
+              src="https://mui.com/static/images/avatar/1.jpg"
+              style={{ borderRadius: "12px", width: "100%", height: 220 }}
+              alt=""
+            />
+          </Grid>
+          {/* ))} */}
 
           <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
             {/* <Grid item xs={12} display={!!errorMessage ? "" : "none"}>

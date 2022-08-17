@@ -8,7 +8,7 @@ interface Hotel {
   departament: string;
   municipality: string;
   logo: string;
-  tipy_hotel: 3 | 4 | 5;
+  type_hotel: 3 | 4 | 5;
   score: number;
   roomtypes: RoomType[]
   images: string[]

@@ -61,7 +61,7 @@
     "CITY": "City",
     "MUNICIPALITY": "Municipality",
     "DEPARTMENT": "Department",
-    "TYPE_ROOM": "Type Room",
+    "TYPE_HOTEL": "Type Hotel",
     "SCORE": "Score",
     "DESCRIPTION": "Description",
     "ROOM_AVAILABLE":"Available rooms",
