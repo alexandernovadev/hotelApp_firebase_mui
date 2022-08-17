@@ -10,7 +10,7 @@ spy.mockReturnValue({ username: "test" });
 
 jest.mock("../../src/hooks/useCheckAuth", () => ({
   useCheckAuth: () => {
-    return "processs";
+    return "process";
   },
 }));
 
@@ -48,6 +48,7 @@ describe("Test in AppRoutes", () => {
       </MemoryRouter>
     );
 
+    screen.debug()
     expect(true).toBe(true);
 
   });
