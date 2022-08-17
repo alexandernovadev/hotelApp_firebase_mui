@@ -24,7 +24,8 @@
     "SAVE": "Save",
     "ERROR_SERVER": "Error with server",
     "UPLOAD": "Upload",
-    "MY_PROFILE": "My Profile"
+    "MY_PROFILE": "My Profile",
+    "FIELD_ERROR":"This field is required *"
   },
   "AUTH": {
     "LOGIN": "Login",

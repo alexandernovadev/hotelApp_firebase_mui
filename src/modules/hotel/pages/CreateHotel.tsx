@@ -5,6 +5,7 @@ import {
   Divider,
   FormControl,
   FormControlLabel,
+  FormHelperText,
   Grid,
   InputLabel,
   MenuItem,
@@ -22,41 +23,45 @@ import { PhotoCamera } from "@mui/icons-material";
 export const CreateHotel = () => {
   const { t } = useTranslation();
   const validationSchema = yup.object({
-    email: yup
-      .string()
-      .email(t("AUTH.INVALID_EMAIL"))
-      .required(t("AUTH.REQUIRED_EMAIL")),
-
-    password: yup
+    name: yup
       .string()
       .min(8, t("AUTH.PASSWORD_ERROR"))
-      .required(t("AUTH.PASSWORD_REQUIRED")),
+      .required(t("COMMON.FIELD_ERROR")),
+
+    description: yup
+      .string()
+      .min(8, t("AUTH.PASSWORD_ERROR"))
+      .required(t("COMMON.FIELD_ERROR")),
+
+    country: yup.string().required(t("COMMON.FIELD_ERROR")),
+    department: yup.string().required(t("COMMON.FIELD_ERROR")),
+    municipality: yup.string().required(t("COMMON.FIELD_ERROR")),
+    type_hotel: yup.string().required(t("COMMON.FIELD_ERROR")),
   });
 
-
-  const handleChangeE = (e:any,valie) => {
-    console.log("Vamos a ver hp", e);
-    console.log("Vamos ==== ", valie);
-    
-  }
-  const { values, touched, errors, handleChange, handleSubmit } = useFormik({
-    initialValues: {
-      name: "",
-      description: "",
-      country: "",
-      logo: "",
-      department: "",
-      municipality: "",
-      type_hotel: "",
-      score: 2,
-      roomtypes: {},
-      images: [],
-    },
-    // validationSchema,
-    onSubmit: (values) => {
-      console.log("Save hotel is: ", values);
-    },
-  });
+  const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
+    useFormik({
+      initialValues: {
+        name: "",
+        description: "",
+        country: "",
+        logo: "",
+        department: "",
+        municipality: "",
+        type_hotel: "",
+        score: 2,
+        roomtypes: {
+          two_twin_bedroom: { state: true, value: 0 },
+          single_room: { state: true, value: 0 },
+          one_queen_bedroom: { state: true, value: 0 },
+        },
+        images: [],
+      },
+      validationSchema,
+      onSubmit: (values) => {
+        console.log("Save hotel is: ", values);
+      },
+    });
   /**
   helperText={touched.name && errors.name}
   error={touched.name && Boolean(errors.name)}
@@ -91,6 +96,7 @@ export const CreateHotel = () => {
               inputProps={{ "data-testid": "name_hotel" }}
               placeholder="Hotel Decameron"
               type="text"
+              onBlur={handleBlur}
               helperText={touched.name && errors.name}
               error={touched.name && Boolean(errors.name)}
               onChange={handleChange}
@@ -102,6 +108,7 @@ export const CreateHotel = () => {
               helperText={touched.description && errors.description}
               error={touched.description && Boolean(errors.description)}
               onChange={handleChange}
+              onBlur={handleBlur}
               value={values.description}
               name="description"
               variant="standard"
@@ -116,12 +123,16 @@ export const CreateHotel = () => {
           </Grid>
 
           <Grid item xs={12} sm={4} sx={{ p: 2 }}>
-            <FormControl fullWidth>
+            <FormControl
+              fullWidth
+              error={touched.country && Boolean(errors.country)}
+            >
               <InputLabel id="country_field">{t("HOTEL.COUNTRY")}</InputLabel>
               <Select
                 labelId="country_field"
                 id="country_field-select"
                 name="country"
+                onBlur={handleBlur}
                 value={values.country}
                 label={t("HOTEL.COUNTRY")}
                 onChange={handleChange}
@@ -129,16 +140,21 @@ export const CreateHotel = () => {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={'Colombia'}>Colombia</MenuItem>
-                <MenuItem value={'Mexico'}>Mexico</MenuItem>
-                <MenuItem value={'Estado Unidos'}>Estados Unidos</MenuItem>
+                <MenuItem value={"Colombia"}>Colombia</MenuItem>
+                <MenuItem value={"Mexico"}>Mexico</MenuItem>
+                <MenuItem value={"Estado Unidos"}>Estados Unidos</MenuItem>
               </Select>
-              {/* <FormHelperText>With label + helper text</FormHelperText> */}
+              {touched.country && errors.country && (
+                <FormHelperText>{errors.country}</FormHelperText>
+              )}
             </FormControl>
           </Grid>
 
           <Grid item xs={12} sm={4} sx={{ p: 2 }}>
-            <FormControl fullWidth>
+            <FormControl
+              fullWidth
+              error={touched.department && Boolean(errors.department)}
+            >
               <InputLabel id="department-field">
                 {t("HOTEL.DEPARTMENT")}
               </InputLabel>
@@ -147,21 +163,28 @@ export const CreateHotel = () => {
                 labelId="department-field"
                 id="department-field-select-helper"
                 value={values.department}
+                onBlur={handleBlur}
                 label={t("HOTEL.DEPARTMENT")}
                 onChange={handleChange}
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={'Cundinamarca'}>Cundinamarca</MenuItem>
-                <MenuItem value={'Huila'}>Huila</MenuItem>
-                <MenuItem value={'Guaviare'}>Guaviare</MenuItem>
+                <MenuItem value={"Cundinamarca"}>Cundinamarca</MenuItem>
+                <MenuItem value={"Huila"}>Huila</MenuItem>
+                <MenuItem value={"Guaviare"}>Guaviare</MenuItem>
               </Select>
-              {/* <FormHelperText>With label + helper text</FormHelperText> */}
+              {touched.department && errors.department && (
+                <FormHelperText>{errors.department}</FormHelperText>
+              )}
             </FormControl>
           </Grid>
+
           <Grid item xs={12} sm={4} sx={{ p: 2 }}>
-            <FormControl fullWidth>
+            <FormControl
+              fullWidth
+              error={touched.municipality && Boolean(errors.municipality)}
+            >
               <InputLabel id="municipality-label">
                 {t("HOTEL.MUNICIPALITY")}
               </InputLabel>
@@ -170,22 +193,28 @@ export const CreateHotel = () => {
                 labelId="municipality-label"
                 id="municipality-label-select-helper"
                 value={values.municipality}
+                onBlur={handleBlur}
                 label={t("HOTEL.MUNICIPALITY")}
                 onChange={handleChange}
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={'La Santillana'}>La Santillana</MenuItem>
-                <MenuItem value={'Unidos Altos'}>Unidos Altos</MenuItem>
-                <MenuItem value={'San Pablo'}>San Pablo</MenuItem>
+                <MenuItem value={"La Santillana"}>La Santillana</MenuItem>
+                <MenuItem value={"Unidos Altos"}>Unidos Altos</MenuItem>
+                <MenuItem value={"San Pablo"}>San Pablo</MenuItem>
               </Select>
-              {/* <FormHelperText>With label + helper text</FormHelperText> */}
+              {touched.municipality && errors.municipality && (
+                <FormHelperText>{errors.municipality}</FormHelperText>
+              )}
             </FormControl>
           </Grid>
 
           <Grid item xs={12} sm={8} sx={{ p: 2 }}>
-            <FormControl fullWidth>
+            <FormControl
+              fullWidth
+              error={touched.type_hotel && Boolean(errors.type_hotel)}
+            >
               <InputLabel id="typeroom-label">
                 {t("HOTEL.TYPE_HOTEL")}
               </InputLabel>
@@ -194,6 +223,7 @@ export const CreateHotel = () => {
                 labelId="typeroom-label"
                 id="typeroom-label-select-helper"
                 value={values.type_hotel}
+                onBlur={handleBlur}
                 label={t("HOTEL.TYPE_ROOM")}
                 onChange={handleChange}
               >
@@ -204,17 +234,20 @@ export const CreateHotel = () => {
                 <MenuItem value={4}>4 Estrellas</MenuItem>
                 <MenuItem value={5}>5 Estrellas</MenuItem>
               </Select>
-              {/* <FormHelperText>With label + helper text</FormHelperText> */}
+              {touched.type_hotel && errors.type_hotel && (
+                <FormHelperText>{errors.type_hotel}</FormHelperText>
+              )}
             </FormControl>
           </Grid>
 
           <Grid item xs={12} sm={4} sx={{ p: 2 }}>
             <InputLabel id="score">{t("HOTEL.SCORE")}</InputLabel>
-            <Rating 
-            name="score"
-            value={+values.score}
-            onChange={handleChange}
-            precision={0.5} />
+            <Rating
+              name="score"
+              value={+values.score}
+              onChange={handleChange}
+              precision={0.5}
+            />
           </Grid>
 
           <Grid item xs={12} sm={12} sx={{ p: 2 }}>
@@ -224,7 +257,13 @@ export const CreateHotel = () => {
           <Grid item xs={4} sm={4} sx={{ p: 2 }}>
             <FormControlLabel
               sx={{ pt: 2 }}
-              control={<Checkbox defaultChecked />}
+              control={
+                <Checkbox
+                  checked={values.roomtypes.two_twin_bedroom.state}
+                  onChange={handleChange}
+                  name="roomtypes.two_twin_bedroom.state"
+                />
+              }
               label={t("HOTEL.TWO_TWIN_BEDROOM")}
             />
           </Grid>
@@ -232,10 +271,18 @@ export const CreateHotel = () => {
             <TextField
               fullWidth
               label=""
-              name="twotwingNumber"
+              onChange={handleChange}
+              value={values.roomtypes.two_twin_bedroom.value}
+              name="roomtypes.two_twin_bedroom.value"
               placeholder="5"
               type="number"
-              sx={{ my: 2, width: "40%" }}
+              sx={{
+                my: 2,
+                width: "40%",
+                display: values.roomtypes.two_twin_bedroom.state
+                  ? "block"
+                  : "none",
+              }}
               variant="standard"
             />
           </Grid>
@@ -243,7 +290,13 @@ export const CreateHotel = () => {
           <Grid item xs={4} sm={4} sx={{ p: 2 }}>
             <FormControlLabel
               sx={{ pt: 2 }}
-              control={<Checkbox defaultChecked />}
+              control={
+                <Checkbox
+                  checked={values.roomtypes.single_room.state}
+                  onChange={handleChange}
+                  name="roomtypes.single_room.state"
+                />
+              }
               label={t("HOTEL.SIMPLE_BEDROOM")}
             />
           </Grid>
@@ -251,10 +304,16 @@ export const CreateHotel = () => {
             <TextField
               fullWidth
               label=""
-              name="simpleRoomNumber"
+              onChange={handleChange}
+              value={values.roomtypes.single_room.value}
+              name="roomtypes.single_room.value"
               placeholder="5"
               type="number"
-              sx={{ my: 2, width: "40%" }}
+              sx={{
+                my: 2,
+                width: "40%",
+                display: values.roomtypes.single_room.state ? "block" : "none",
+              }}
               variant="standard"
             />
           </Grid>
@@ -262,7 +321,13 @@ export const CreateHotel = () => {
           <Grid item xs={4} sm={4} sx={{ p: 2 }}>
             <FormControlLabel
               sx={{ pt: 2 }}
-              control={<Checkbox defaultChecked />}
+              control={
+                <Checkbox
+                  checked={values.roomtypes.one_queen_bedroom.state}
+                  onChange={handleChange}
+                  name="roomtypes.one_queen_bedroom.state"
+                />
+              }
               label={t("HOTEL.ONE_QUEEN_BEDROOM")}
             />
           </Grid>
@@ -270,10 +335,18 @@ export const CreateHotel = () => {
             <TextField
               fullWidth
               label=""
-              name="onequeenbedroomNumber"
+              onChange={handleChange}
+              value={values.roomtypes.one_queen_bedroom.value}
+              name="roomtypes.one_queen_bedroom.value"
               placeholder="5"
               type="number"
-              sx={{ my: 2, width: "40%" }}
+              sx={{
+                my: 2,
+                width: "40%",
+                display: values.roomtypes.one_queen_bedroom.state
+                  ? "block"
+                  : "none",
+              }}
               variant="standard"
             />
           </Grid>
@@ -293,7 +366,7 @@ export const CreateHotel = () => {
           </Grid>
 
           {/* {Array.from({ length: 8 }).map((i) => ( */}
-
+            
           <Grid item xs={4} sm={4} sx={{ p: 1 }}>
             <img
               src="https://mui.com/static/images/avatar/1.jpg"

@@ -24,7 +24,8 @@
     "SAVE": "Guardar",
     "ERROR_SERVER": "Error del servidor",
     "UPLOAD": "Subir",
-    "MY_PROFILE": "Mi Perfil"
+    "MY_PROFILE": "Mi Perfil",
+    "FIELD_ERROR":"Campo requerido *"
   },
   "AUTH": {
     "LOGIN": "Iniciar Sesión",
