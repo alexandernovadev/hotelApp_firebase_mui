@@ -1,3 +1,4 @@
+import React from 'react'// Testing required it
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useCheckAuth } from "../hooks/useCheckAuth";
 import { AuthRoutes } from "../modules/auth/routes/AuthRoutes";
