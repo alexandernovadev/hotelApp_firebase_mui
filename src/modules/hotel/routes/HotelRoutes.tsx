@@ -9,9 +9,10 @@ import { MyProfile } from "../pages/MyProfile";
 export const HotelRoutes = () => {
   return (
     <Routes>
-      <Route path="" element={<AllHotels />} />
+      <Route path="" element={<CreateHotel />} />
+      {/* <Route path="" element={<AllHotels />} /> */}
       <Route path="my-profile" element={<MyProfile />} />
-      <Route path="create" element={<CreateHotel />} />
+      {/* <Route path="create" element={<CreateHotel />} /> */}
       <Route path="edit" element={<EditHotel />} />
       <Route path="my-hotels" element={<MyHotels />} />
 

@@ -1,10 +1,14 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+
 import { authSlice } from "./auth/AuthSlice";
+import { hotelSlice } from "./hotels/HotelSlice";
+
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 export const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
+    hotel: hotelSlice.reducer
   },
 });
 

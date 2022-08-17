@@ -22,7 +22,9 @@
     "EDIT": "Edit",
     "ADD": "Add",
     "SAVE": "Save",
-    "ERROR_SERVER":"Error with server"
+    "ERROR_SERVER": "Error with server",
+    "UPLOAD": "Upload",
+    "MY_PROFILE": "My Profile"
   },
   "AUTH": {
     "LOGIN": "Login",
@@ -35,21 +37,39 @@
     "CHANGE_PASSWORD_ERROR": "Error changing password",
     "EMAIL": "Email",
     "PASSWORD": "Password",
-    "PASSWORD_REQUIRED":"Password required",
+    "PASSWORD_REQUIRED": "Password required",
     "PASSWORD_CONFIRM": "Confirm Password",
     "PASSWORD_CONFIRM_ERROR": "Passwords do not match",
     "PASSWORD_ERROR": "Password is required",
-    "CREATE_ACCOUNT":"Create an account",
-    "INVALID_EMAIL":"Invalid email",
-    "REQUIRED_EMAIL":"Email is required",
-    "FULL_NAME":"Full Name",
-    "ALREADY_ACCOUNT":"You already have an account ?",
-    "NAME_REQUIRED":"Name is required",
-    "NAME_ERROR":"Name should be at least 4 characters",
-    "EMAIL_IN_USE":"Email is already in use",
-    "USER_NO_EXIST":"User does not exist",
-    "EMAILORPASSWORD_ERROR":"Email or password is incorrect",
-    "POPUP_CLOSED_ERROR":"Popup closed error"
-
+    "CREATE_ACCOUNT": "Create an account",
+    "INVALID_EMAIL": "Invalid email",
+    "REQUIRED_EMAIL": "Email is required",
+    "FULL_NAME": "Full Name",
+    "ALREADY_ACCOUNT": "You already have an account ?",
+    "NAME_REQUIRED": "Name is required",
+    "NAME_ERROR": "Name should be at least 4 characters",
+    "EMAIL_IN_USE": "Email is already in use",
+    "USER_NO_EXIST": "User does not exist",
+    "EMAILORPASSWORD_ERROR": "Email or password is incorrect",
+    "POPUP_CLOSED_ERROR": "Popup closed error"
+  },
+  "HOTEL": {
+    "SAVE_HOTEL": "Save Hotel",
+    "NAME_HOTEL": "Name Hotel",
+    "PLACEHOLDER_DESC":"This hotel is amazing",
+    "COUNTRY": "Country",
+    "CITY": "City",
+    "MUNICIPALITY": "Municipality",
+    "DEPARTMENT": "Department",
+    "TYPE_ROOM": "Type Room",
+    "SCORE": "Score",
+    "DESCRIPTION": "Description",
+    "ROOM_AVAILABLE":"Available rooms",
+    "IMAGE_GALLERY": "Image Gallery",
+    "MY_HOTELS": "My Hotels",
+    "ALL_HOTELS": "All Hotels",
+    "TWO_TWIN_BEDROOM":"Two twin bedroom",
+    "SIMPLE_BEDROOM":"Simple bedroom",
+    "ONE_QUEEN_BEDROOM":"One queen bedroom"
   }
 }
