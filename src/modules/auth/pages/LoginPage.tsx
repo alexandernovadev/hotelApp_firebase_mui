@@ -49,7 +49,6 @@ export const LoginPage = () => {
     validationSchema,
     onSubmit: (values) => {
       loginFire(values);
-      // console.log("Login :", values);
     },
   });
 

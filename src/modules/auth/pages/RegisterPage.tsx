@@ -1,8 +1,10 @@
-import {  useSelector } from "react-redux";
+import React from "react"; // Test Required react here
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { Link as RouterLink } from "react-router-dom";
+
 import {
   Alert,
   Button,
@@ -14,11 +16,13 @@ import {
 
 import { AuthLayout } from "../layouts/AuthLayout";
 import { useRegister } from "../hooks/useRegister";
-import {RootState} from "../../../store/store"
+import { RootState } from "../../../store/store";
 
 export const RegisterPage = () => {
   const { t } = useTranslation();
-  const { status, errorMessage } = useSelector((state:RootState) => state.auth);
+  const { status, errorMessage } = useSelector(
+    (state: RootState) => state.auth
+  );
   const { register } = useRegister();
 
   const validationSchema = yup.object({
@@ -53,6 +57,7 @@ export const RegisterPage = () => {
   return (
     <AuthLayout title={t("AUTH.CREATE_ACCOUNT")}>
       <form
+        aria-label="submit-form"
         onSubmit={handleSubmit}
         className="animate__animated animate__fadeIn animate__faster"
       >
@@ -66,6 +71,7 @@ export const RegisterPage = () => {
               label={t("AUTH.FULL_NAME")}
               name="displayName"
               onChange={handleChange}
+              inputProps={{ "data-testid": "displayName" }}
               placeholder={t("AUTH.FULL_NAME")}
               type="text"
               value={values.displayName}
@@ -81,6 +87,7 @@ export const RegisterPage = () => {
               label={t("AUTH.EMAIL")}
               name="email"
               onChange={handleChange}
+              inputProps={{ "data-testid": "email" }}
               placeholder="correo@google.com"
               type="email"
               value={values.email}
@@ -95,6 +102,7 @@ export const RegisterPage = () => {
               helperText={touched.password && errors.password}
               label={t("AUTH.PASSWORD")}
               name="password"
+              inputProps={{ "data-testid": "password" }}
               onChange={handleChange}
               placeholder={t("AUTH.PASSWORD")}
               type="password"
@@ -105,12 +113,15 @@ export const RegisterPage = () => {
           <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
             <Grid item xs={12} display={!!errorMessage ? "" : "none"}>
               <Alert severity="error">{errorMessage}</Alert>
-            </Grid> 
+            </Grid>
 
             <Grid item xs={12}>
-              <Button type="submit" variant="contained"
-              disabled={status === 'checking'}
-              fullWidth>
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={status === "checking"}
+                fullWidth
+              >
                 {t("AUTH.REGISTER")}
               </Button>
             </Grid>
