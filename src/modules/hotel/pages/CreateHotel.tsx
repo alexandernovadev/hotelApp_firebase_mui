@@ -126,7 +126,7 @@ export const CreateHotel = () => {
 
   const onFileInputChangeMultiple = async ({ target }: any) => {
     if (target.files === 0) return;
-    const image = await uploadImages(target.files);   
+    const image = await uploadImages(target.files);
     /* @ts-ignore */
     setValues({ ...values, images: [...values.images, image].flat() });
   };
@@ -135,7 +135,18 @@ export const CreateHotel = () => {
     <HotelLayout title={t("HOTEL.SAVE_HOTEL")}>
       <form onSubmit={handleSubmit} aria-label="submit-form">
         <Grid container>
-          <Grid item xs={12} sm={4} sx={{ p: 2 }}>
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            sx={{
+              p: 2,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <Avatar
               alt={values.name}
               src={values.logo}
@@ -446,12 +457,11 @@ export const CreateHotel = () => {
           </Grid>
 
           <Grid item xs={12} sm={4} sx={{ p: 2 }}>
-            <Button variant="outlined" component="label"
-            disabled={isSaving}>
+            <Button variant="outlined" component="label" disabled={isSaving}>
               <Typography sx={{ px: 2, mx: 1 }}>
                 {t("COMMON.UPLOAD")}
               </Typography>
-               {isSaving ? <CircularProgress size={20} /> : <PhotoCamera />}
+              {isSaving ? <CircularProgress size={20} /> : <PhotoCamera />}
               <input
                 hidden
                 onChange={onFileInputChangeMultiple}
@@ -463,7 +473,7 @@ export const CreateHotel = () => {
           </Grid>
 
           {values.images.map((image) => (
-            <Grid item xs={4} sm={4} sx={{ p: 1 }} key={image}>
+            <Grid item xs={6} sm={4} sx={{ p: 1 }} key={image}>
               <img
                 src={image}
                 style={{ borderRadius: "12px", width: "100%", height: 220 }}
