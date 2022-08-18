@@ -57,8 +57,8 @@ export const CreateHotel = () => {
           then: yup
             .string()
             .required(t("COMMON.FIELD_ERROR"))
-            .matches(/^[1-9]+[0-9]*$/, "Debe ser numero valido")
-            .max(5, "No pueden haber mas de 99999 habitacion"),
+            .matches(/^[1-9]+[0-9]*$/, t("HOTEL.NUMBER_VALIDATION"))
+            .max(5, t("HOTEL.NUMBER_ROOMS_MAX")),
         }),
       }),
       single_room: yup.object({
@@ -96,18 +96,18 @@ export const CreateHotel = () => {
     setValues,
   } = useFormik({
     initialValues: {
-      name: "Decameron",
-      description: "Esto es un mensaje es pata regreasr a ganas",
-      country: "Colombia",
+      name: "",
+      description: "",
+      country: "",
       logo: "",
-      department: "Cundinamarca",
-      municipality: "La Santillana",
-      type_hotel: "3",
+      department: "",
+      municipality: "",
+      type_hotel: "",
       score: 2,
       roomtypes: {
-        two_twin_bedroom: { state: true, value: 5 },
-        single_room: { state: true, value: 6 },
-        one_queen_bedroom: { state: true, value: 9 },
+        two_twin_bedroom: { state: true, value: 0 },
+        single_room: { state: true, value: 0 },
+        one_queen_bedroom: { state: true, value: 0 },
       },
       images: [],
     },

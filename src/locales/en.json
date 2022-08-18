@@ -72,7 +72,7 @@
     "TWO_TWIN_BEDROOM":"Two twin bedroom",
     "SIMPLE_BEDROOM":"Simple bedroom",
     "ONE_QUEEN_BEDROOM":"One queen bedroom",
-    "NUMBER_VALIDATION":"Only numbers are allowed",
+    "NUMBER_VALIDATION":"Only valid numbers are allowed",
     "NUMBER_ROOMS_MAX":"The number of rooms should be less than 99999"
   }
 }
