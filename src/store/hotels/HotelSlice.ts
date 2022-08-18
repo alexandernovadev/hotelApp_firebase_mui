@@ -40,13 +40,18 @@ export const hotelSlice = createSlice({
       state.isSaving = payload
     },
     setLoad: (state, { payload }) => {
+      console.log("Hola ", payload);
+
       state.isLoadingData = payload
     },
     getHotels: (state, { payload }) => {
       state.hotels = payload;
     },
+    setHotelActive: (state, { payload }) => {
+      state.active = payload;
+    },
 
   },
 });
 
-export const { getHotels, setSaving, setLoad } = hotelSlice.actions;
+export const { getHotels, setSaving, setLoad, setHotelActive } = hotelSlice.actions;

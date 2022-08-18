@@ -56,6 +56,7 @@
   },
   "HOTEL": {
     "SAVE_HOTEL": "Guardar Hotel",
+    "EDIT_HOTEL": "Editar Hotel",
     "NAME_HOTEL": "Nombre del Hotel",
     "PLACEHOLDER_DESC":"Este hotel es grandioso",
     "COUNTRY": "País",

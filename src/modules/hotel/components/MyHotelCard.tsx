@@ -153,10 +153,10 @@ export const MyHotelCard = ({
         </div>
 
         <div className="details--btns">
-          <Link className="btn-show" to={`edit/${id}`}>
+          <Link className="btn-show" to={`/edit/${id}`}>
             Ver Mas
           </Link>
-          <Link className="btn-edit" to={`edit/${id}`}>
+          <Link className="btn-edit" to={`/edit/${id}`}>
             Editar
           </Link>
         </div>

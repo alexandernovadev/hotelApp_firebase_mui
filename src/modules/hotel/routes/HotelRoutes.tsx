@@ -10,7 +10,7 @@ export const HotelRoutes = () => {
   return (
     <Routes>
       {/* <Route path="" element={<AllHotels />} /> */}
-      <Route path="" element={<MyHotels />} />
+      <Route path="" element={<CreateHotel />} />
       <Route path="my-profile" element={<MyProfile />} />
       <Route path="create" element={<CreateHotel />} />
       <Route path="edit/:id" element={<EditHotel />} />

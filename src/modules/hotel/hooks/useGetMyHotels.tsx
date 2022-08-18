@@ -23,8 +23,8 @@ export const useGetMyHotels = () => {
       hotels.push({ id: doc.id, ...doc.data() });
     });
 
-    console.log("My Firebase responde with ", docs);
-    console.log("My hotels are ", hotels);
+    // console.log("My Firebase responde with ", docs);
+    // console.log("My hotels are ", hotels);
     dispatch(getHotels(hotels));
 
     dispatch(setLoad(false));

@@ -56,6 +56,7 @@
   },
   "HOTEL": {
     "SAVE_HOTEL": "Save Hotel",
+    "EDIT_HOTEL":"Edit Hotel",
     "NAME_HOTEL": "Name Hotel",
     "PLACEHOLDER_DESC":"This hotel is amazing",
     "COUNTRY": "Country",
