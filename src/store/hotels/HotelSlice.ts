@@ -36,8 +36,6 @@ export const hotelSlice = createSlice({
   initialState,
   reducers: {
     setSaving: (state, { payload }) => {
-      console.log("Como es ?", payload);
-
       state.isSaving = payload
     },
     saveHotel: (state, { payload }) => {

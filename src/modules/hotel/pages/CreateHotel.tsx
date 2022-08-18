@@ -2,6 +2,7 @@ import {
   Avatar,
   Button,
   Checkbox,
+  CircularProgress,
   Divider,
   FormControl,
   FormControlLabel,
@@ -23,11 +24,14 @@ import { PhotoCamera } from "@mui/icons-material";
 import { useSaveHotel } from "../hooks/useSaveHotel";
 import { RootState } from "../../../store/store";
 import { useSelector } from "react-redux";
+import { useUploadClodninary } from "../../../hooks/useUploadClodninary";
 
 export const CreateHotel = () => {
   const { isSaving } = useSelector((state: RootState) => state.hotel);
 
   const { saveHotel } = useSaveHotel();
+
+  const { uploadImages } = useUploadClodninary();
 
   const { t } = useTranslation();
   const validationSchema = yup.object({
@@ -82,29 +86,52 @@ export const CreateHotel = () => {
     }),
   });
 
-  const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
-    useFormik({
-      initialValues: {
-        name: "Decameron",
-        description: "Esto es un mensaje es pata regreasr a ganas",
-        country: "Colombia",
-        logo: "",
-        department: "Cundinamarca",
-        municipality: "La Santillana",
-        type_hotel: "3",
-        score: 2,
-        roomtypes: {
-          two_twin_bedroom: { state: true, value: 5 },
-          single_room: { state: true, value: 6 },
-          one_queen_bedroom: { state: true, value: 9 },
-        },
-        images: [],
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleSubmit,
+    handleBlur,
+    setValues,
+  } = useFormik({
+    initialValues: {
+      name: "Decameron",
+      description: "Esto es un mensaje es pata regreasr a ganas",
+      country: "Colombia",
+      logo: "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-original-577x577/s3/0020/6116/brand.gif?itok=3ZNfeNrU",
+      department: "Cundinamarca",
+      municipality: "La Santillana",
+      type_hotel: "3",
+      score: 2,
+      roomtypes: {
+        two_twin_bedroom: { state: true, value: 5 },
+        single_room: { state: true, value: 6 },
+        one_queen_bedroom: { state: true, value: 9 },
       },
-      validationSchema,
-      onSubmit: (values) => {
-        saveHotel(values);
-      },
-    });
+      images: [
+        "https://res.cloudinary.com/dv8wurqdp/image/upload/v1660795911/vaovahotels/fkuormpknhg4brhfoehh.png",
+      ],
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      saveHotel(values);
+    },
+  });
+
+  const onFileInputChangeLogo = async ({ target }: any) => {
+    if (target.files === 0) return;
+    const image = await uploadImages(target.files);
+    /* @ts-ignore */
+    setValues({ ...values, logo: image[0] });
+  };
+
+  const onFileInputChangeMultiple = async ({ target }: any) => {
+    if (target.files === 0) return;
+    const image = await uploadImages(target.files);   
+    /* @ts-ignore */
+    setValues({ ...values, images: [...values.images, image].flat() });
+  };
 
   return (
     <HotelLayout title={t("HOTEL.SAVE_HOTEL")}>
@@ -112,16 +139,26 @@ export const CreateHotel = () => {
         <Grid container>
           <Grid item xs={12} sm={4} sx={{ p: 2 }}>
             <Avatar
-              alt="Remy Sharp"
-              src="https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-original-577x577/s3/0020/6116/brand.gif?itok=3ZNfeNrU"
+              alt={values.name}
+              src={values.logo}
               sx={{ width: 160, height: 160, border: "1px solid black" }}
             />
-            <Button variant="outlined" component="label" sx={{ mt: 1 }}>
+            <Button
+              variant="outlined"
+              component="label"
+              sx={{ mt: 1 }}
+              disabled={isSaving}
+            >
               <Typography sx={{ px: 2, mx: 1 }}>
                 {t("COMMON.UPLOAD")}
               </Typography>
-              <PhotoCamera />
-              <input hidden accept="image/*" multiple type="file" />
+              {isSaving ? <CircularProgress size={20} /> : <PhotoCamera />}
+              <input
+                hidden
+                accept="image/*"
+                onChange={onFileInputChangeLogo}
+                type="file"
+              />
             </Button>
           </Grid>
 
@@ -411,25 +448,31 @@ export const CreateHotel = () => {
           </Grid>
 
           <Grid item xs={12} sm={4} sx={{ p: 2 }}>
-            <Button variant="outlined" component="label">
+            <Button variant="outlined" component="label"
+            disabled={isSaving}>
               <Typography sx={{ px: 2, mx: 1 }}>
                 {t("COMMON.UPLOAD")}
               </Typography>
-              <PhotoCamera />
-              <input hidden accept="image/*" multiple type="file" />
+               {isSaving ? <CircularProgress size={20} /> : <PhotoCamera />}
+              <input
+                hidden
+                onChange={onFileInputChangeMultiple}
+                accept="image/*"
+                multiple
+                type="file"
+              />
             </Button>
           </Grid>
 
-          {/* {Array.from({ length: 8 }).map((i) => ( */}
-
-          <Grid item xs={4} sm={4} sx={{ p: 1 }}>
-            <img
-              src="https://mui.com/static/images/avatar/1.jpg"
-              style={{ borderRadius: "12px", width: "100%", height: 220 }}
-              alt=""
-            />
-          </Grid>
-          {/* ))} */}
+          {values.images.map((image) => (
+            <Grid item xs={4} sm={4} sx={{ p: 1 }} key={image}>
+              <img
+                src={image}
+                style={{ borderRadius: "12px", width: "100%", height: 220 }}
+                alt={image}
+              />
+            </Grid>
+          ))}
 
           <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
             {/* <Grid item xs={12} display={!!errorMessage ? "" : "none"}>
