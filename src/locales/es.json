@@ -71,6 +71,8 @@
     "ALL_HOTELS": "Todos los Hoteles",
     "TWO_TWIN_BEDROOM":"Habitación cama doble",
     "SIMPLE_BEDROOM":"Habitación simple",
-    "ONE_QUEEN_BEDROOM":"Habitación Queen"
+    "ONE_QUEEN_BEDROOM":"Habitación Queen",
+    "NUMBER_VALIDATION":"Solo se permiten números",
+    "NUMBER_ROOMS_MAX":"El número de habitaciones no puede ser mayor a 99999"
   }
 }

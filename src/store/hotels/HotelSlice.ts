@@ -35,6 +35,11 @@ export const hotelSlice = createSlice({
   name: "hotel",
   initialState,
   reducers: {
+    setSaving: (state, { payload }) => {
+      console.log("Como es ?", payload);
+
+      state.isSaving = payload
+    },
     saveHotel: (state, { payload }) => {
       // state.status = "authenticated";
       // state.uid = payload.uid;
@@ -47,4 +52,4 @@ export const hotelSlice = createSlice({
   },
 });
 
-export const { saveHotel } = hotelSlice.actions;
+export const { saveHotel, setSaving } = hotelSlice.actions;

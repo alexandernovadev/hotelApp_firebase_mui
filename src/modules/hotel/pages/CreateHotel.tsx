@@ -8,6 +8,7 @@ import {
   FormHelperText,
   Grid,
   InputLabel,
+  LinearProgress,
   MenuItem,
   Rating,
   Select,
@@ -19,8 +20,15 @@ import HotelLayout from "../layout/HotelLayout";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { PhotoCamera } from "@mui/icons-material";
+import { useSaveHotel } from "../hooks/useSaveHotel";
+import { RootState } from "../../../store/store";
+import { useSelector } from "react-redux";
 
 export const CreateHotel = () => {
+  const { isSaving } = useSelector((state: RootState) => state.hotel);
+
+  const { saveHotel } = useSaveHotel();
+
   const { t } = useTranslation();
   const validationSchema = yup.object({
     name: yup
@@ -37,37 +45,67 @@ export const CreateHotel = () => {
     department: yup.string().required(t("COMMON.FIELD_ERROR")),
     municipality: yup.string().required(t("COMMON.FIELD_ERROR")),
     type_hotel: yup.string().required(t("COMMON.FIELD_ERROR")),
+    roomtypes: yup.object({
+      two_twin_bedroom: yup.object({
+        state: yup.boolean(),
+        value: yup.string().when("state", {
+          is: true,
+          then: yup
+            .string()
+            .required(t("COMMON.FIELD_ERROR"))
+            .matches(/^[1-9]+[0-9]*$/, "Debe ser numero valido")
+            .max(5, "No pueden haber mas de 99999 habitacion"),
+        }),
+      }),
+      single_room: yup.object({
+        state: yup.boolean(),
+        value: yup.string().when("state", {
+          is: true,
+          then: yup
+            .string()
+            .required(t("COMMON.FIELD_ERROR"))
+            .matches(/^[1-9]+[0-9]*$/, t("HOTEL.NUMBER_VALIDATION"))
+            .max(5, t("HOTEL.NUMBER_ROOMS_MAX")),
+        }),
+      }),
+      one_queen_bedroom: yup.object({
+        state: yup.boolean(),
+        value: yup.string().when("state", {
+          is: true,
+          then: yup
+            .string()
+            .required(t("COMMON.FIELD_ERROR"))
+            .matches(/^[1-9]+[0-9]*$/, t("HOTEL.NUMBER_VALIDATION"))
+            .max(5, t("HOTEL.NUMBER_ROOMS_MAX")),
+        }),
+      }),
+    }),
   });
 
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: {
-        name: "",
-        description: "",
-        country: "",
+        name: "Decameron",
+        description: "Esto es un mensaje es pata regreasr a ganas",
+        country: "Colombia",
         logo: "",
-        department: "",
-        municipality: "",
-        type_hotel: "",
+        department: "Cundinamarca",
+        municipality: "La Santillana",
+        type_hotel: "3",
         score: 2,
         roomtypes: {
-          two_twin_bedroom: { state: true, value: 0 },
-          single_room: { state: true, value: 0 },
-          one_queen_bedroom: { state: true, value: 0 },
+          two_twin_bedroom: { state: true, value: 5 },
+          single_room: { state: true, value: 6 },
+          one_queen_bedroom: { state: true, value: 9 },
         },
         images: [],
       },
       validationSchema,
       onSubmit: (values) => {
-        console.log("Save hotel is: ", values);
+        saveHotel(values);
       },
     });
-  /**
-  helperText={touched.name && errors.name}
-  error={touched.name && Boolean(errors.name)}
-  onChange={handleChange}
-  value={values.name}
-   */
+
   return (
     <HotelLayout title={t("HOTEL.SAVE_HOTEL")}>
       <form onSubmit={handleSubmit} aria-label="submit-form">
@@ -270,8 +308,13 @@ export const CreateHotel = () => {
           <Grid item xs={8} sm={8} sx={{ p: 2 }}>
             <TextField
               fullWidth
-              label=""
               onChange={handleChange}
+              onBlur={handleBlur}
+              helperText={
+                touched.roomtypes?.two_twin_bedroom?.value &&
+                errors.roomtypes?.two_twin_bedroom?.value
+              }
+              error={Boolean(errors.roomtypes?.two_twin_bedroom?.value)}
               value={values.roomtypes.two_twin_bedroom.value}
               name="roomtypes.two_twin_bedroom.value"
               placeholder="5"
@@ -304,8 +347,14 @@ export const CreateHotel = () => {
             <TextField
               fullWidth
               label=""
-              onChange={handleChange}
+              onBlur={handleBlur}
+              helperText={
+                touched.roomtypes?.single_room?.value &&
+                errors.roomtypes?.single_room?.value
+              }
+              error={Boolean(errors.roomtypes?.single_room?.value)}
               value={values.roomtypes.single_room.value}
+              onChange={handleChange}
               name="roomtypes.single_room.value"
               placeholder="5"
               type="number"
@@ -335,8 +384,14 @@ export const CreateHotel = () => {
             <TextField
               fullWidth
               label=""
-              onChange={handleChange}
+              onBlur={handleBlur}
+              helperText={
+                touched.roomtypes?.one_queen_bedroom?.value &&
+                errors.roomtypes?.one_queen_bedroom?.value
+              }
+              error={Boolean(errors.roomtypes?.one_queen_bedroom?.value)}
               value={values.roomtypes.one_queen_bedroom.value}
+              onChange={handleChange}
               name="roomtypes.one_queen_bedroom.value"
               placeholder="5"
               type="number"
@@ -366,7 +421,7 @@ export const CreateHotel = () => {
           </Grid>
 
           {/* {Array.from({ length: 8 }).map((i) => ( */}
-            
+
           <Grid item xs={4} sm={4} sx={{ p: 1 }}>
             <img
               src="https://mui.com/static/images/avatar/1.jpg"
@@ -385,11 +440,12 @@ export const CreateHotel = () => {
               <Button
                 type="submit"
                 variant="contained"
-                disabled={status === "checking"}
+                disabled={isSaving}
                 fullWidth
               >
                 {t("HOTEL.SAVE_HOTEL")}
               </Button>
+              {isSaving && <LinearProgress color="secondary" />}
             </Grid>
           </Grid>
         </Grid>
