@@ -19,6 +19,7 @@ interface RoomType {
 }
 interface HotelState {
   isSaving: boolean,
+  isLoadingData: boolean,
   messageSaved: string,
   hotels: [],
   active?: Hotel
@@ -26,7 +27,7 @@ interface HotelState {
 
 const initialState = {
   isSaving: false,
-  messageSaved: "",
+  isLoadingData: false,
   hotels: [],
   active: {}
 } as HotelState
@@ -38,16 +39,14 @@ export const hotelSlice = createSlice({
     setSaving: (state, { payload }) => {
       state.isSaving = payload
     },
-    saveHotel: (state, { payload }) => {
-      // state.status = "authenticated";
-      // state.uid = payload.uid;
-      // state.email = payload.email;
-      // state.displayName = payload.displayName;
-      // state.photoURL = payload.photoURL;
-      // state.errorMessage = '';
+    setLoad: (state, { payload }) => {
+      state.isLoadingData = payload
+    },
+    getHotels: (state, { payload }) => {
+      state.hotels = payload;
     },
 
   },
 });
 
-export const { saveHotel, setSaving } = hotelSlice.actions;
+export const { getHotels, setSaving, setLoad } = hotelSlice.actions;

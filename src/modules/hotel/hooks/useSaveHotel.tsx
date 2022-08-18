@@ -6,7 +6,6 @@ import { RootState, useAppDispatch } from "../../../store/store";
 
 export const useSaveHotel = () => {
   const { uid } = useSelector((state: RootState) => state.auth);
-  // const { isSaving } = useSelector((state: RootState) => state.hotel);
   const dispatch = useAppDispatch();
 
 
