@@ -99,7 +99,7 @@ export const CreateHotel = () => {
       name: "Decameron",
       description: "Esto es un mensaje es pata regreasr a ganas",
       country: "Colombia",
-      logo: "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-original-577x577/s3/0020/6116/brand.gif?itok=3ZNfeNrU",
+      logo: "",
       department: "Cundinamarca",
       municipality: "La Santillana",
       type_hotel: "3",
@@ -109,9 +109,7 @@ export const CreateHotel = () => {
         single_room: { state: true, value: 6 },
         one_queen_bedroom: { state: true, value: 9 },
       },
-      images: [
-        "https://res.cloudinary.com/dv8wurqdp/image/upload/v1660795911/vaovahotels/fkuormpknhg4brhfoehh.png",
-      ],
+      images: [],
     },
     validationSchema,
     onSubmit: (values) => {
